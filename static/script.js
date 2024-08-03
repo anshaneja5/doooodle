@@ -30,7 +30,7 @@ function startDrawing(e) {
     context.moveTo(pos.x, pos.y);
 }
 
-function draw(e) {
+function drawOnCanvas(e) {
     e.preventDefault();
     if (!drawing) return;
     const pos = getPosition(e);
@@ -101,13 +101,13 @@ function renderPieChart(probabilities) {
 let pieChart;
 
 canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousemove', drawOnCanvas);
 canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mouseleave', stopDrawing);
 
 // Touch events
 canvas.addEventListener('touchstart', startDrawing);
-canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchmove', drawOnCanvas);
 canvas.addEventListener('touchend', stopDrawing);
 
 // Prevent scrolling when touching the canvas
