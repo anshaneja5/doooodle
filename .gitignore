@@ -2,3 +2,4 @@
 .quickdrawcache
 .venv
 content
+.env

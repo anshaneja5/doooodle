@@ -97,5 +97,12 @@ def predict():
     return jsonify({'prediction': classes[predicted_class], 'probabilities': probabilities})
 
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+port = os.getenv('PORT')
+
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(port=port)
