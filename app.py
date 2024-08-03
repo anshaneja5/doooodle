@@ -14,7 +14,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 import os
 # Load your trained model
-model_path = '/opt/render/project/src/model2.pkl'
+model_path = 'model2.pkl'
 if os.path.exists(model_path):
     logging.debug(f"Model file {model_path} found.")
     with open(model_path, 'rb') as file:
