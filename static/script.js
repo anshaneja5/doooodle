@@ -52,7 +52,7 @@ function clearCanvas() {
 
 function predict() {
     const image = canvas.toDataURL('image/png');
-    fetch('/predict', {
+    fetch('https://doooodle.onrender.com/predict', {
         method: 'POST',
         body: JSON.stringify({ image }),
         headers: {
