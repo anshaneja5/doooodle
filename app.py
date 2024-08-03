@@ -100,9 +100,13 @@ def process_transparent_image(image_data):
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
+    print("data received is",data)
     image_data = data['image']
     processed_image = process_transparent_image(image_data)
     print("processed img is : ", processed_image)
+    if model is None:
+        print("ew")
+        return jsonify({'error': 'Model not loaded'}), 500
     prediction = model.predict(processed_image)
     print("prediction is",prediction)
     classes = ['banana', 'basketball', 'ladder']
