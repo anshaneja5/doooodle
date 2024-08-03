@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --primary-color: #0073e6;
+            --secondary-color: #005bb5;
+            --canvas-bg: white;
+            --canvas-border: #0073e6;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --primary-color: #4a9eff;
+            --secondary-color: #3282d8;
+            --canvas-bg: #2c2c2c;
+            --canvas-border: #4a9eff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        #canvas {
+            border: 2px solid var(--canvas-border);
+            border-radius: 15px;
+            background-color: var(--canvas-bg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            height: auto;
+        }
+
+        #controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--canvas-bg);
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: 400;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        #chartContainer {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        #supportedDoodles {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        #darkModeToggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-top: 40px;  /* Add margin to prevent overlap */
+            }
+
+            #canvas {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            #darkModeToggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle">☀️</button>
+    <h1>Doodle Predictor</h1>
+    <p id="supportedDoodles">
+        Supported doodles:
+        <span class="emoji">🍌</span> Banana,
+        <span class="emoji">🏀</span> Basketball,
+        <span class="emoji">🪜</span> Ladder
+    </p>
+    <canvas id="canvas" width="280" height="280"></canvas>
+    <div id="controls">
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="predict()">Predict</button>
+    </div>
+    <p id="result">Prediction will appear here</p>
+    <div id="chartContainer">
+        <canvas id="pieChart"></canvas>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
