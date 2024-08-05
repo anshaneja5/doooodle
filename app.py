@@ -8,24 +8,25 @@ import cv2
 app = Flask(__name__)
 
 # Load your trained model
-# model = tf.keras.models.load_model('doodles.keras')
+model = tf.keras.models.load_model('best_model.keras')
 import pickle
 import logging 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 import os
-# Load your trained model
-model_path = 'model2.pkl'
-if os.path.exists(model_path):
-    logging.debug(f"Model file {model_path} found.")
-    with open(model_path, 'rb') as file:
-        model = pickle.load(file)
-    logging.debug("Model loaded successfully.")
-else:
-    logging.error(f"Model file {model_path} not found.")
-    model = None
+# # Load your trained model
+# model_path = 'model2.pkl'
+# if os.path.exists(model_path):
+#     logging.debug(f"Model file {model_path} found.")
+#     with open(model_path, 'rb') as file:
+#         model = pickle.load(file)
+#     logging.debug("Model loaded successfully.")
+# else:
+#     logging.error(f"Model file {model_path} not found.")
+#     model = None
 
 # with open('model2.pkl', 'rb') as file:
 #     model = pickle.load(file)
+
 @app.route('/')
 def index():
     return render_template('index.html')
